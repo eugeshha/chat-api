@@ -1,4 +1,4 @@
-![CI](https://github.com/eugeshha/chat-api/actions/workflows/web.yml/badge.svg)
+![CI](https://github.com/eugeshha/chat-api/actions/workflows/deploy.yml/badge.svg)
 
 # Webpack5
 
