@@ -4,19 +4,17 @@ class ChatApp {
   constructor() {
     this.currentUser = null;
     this.ws = null;
-    // Используем переменные окружения, если они определены через DefinePlugin
-    const apiUrl = typeof process !== "undefined" && process.env?.API_URL 
-      ? process.env.API_URL 
-      : "http://localhost:3000";
+    // Используем переменные окружения, определенные через DefinePlugin
+    // В production они будут заменены на строки во время сборки
+    // В development используем дефолтные значения для локальной разработки
+    const apiUrl = process.env.API_URL || "http://localhost:3000";
     
     // Определяем WebSocket URL
-    let wsUrl;
-    if (typeof process !== "undefined" && process.env?.WS_URL) {
-      wsUrl = process.env.WS_URL;
-    } else if (apiUrl.startsWith("http")) {
+    let wsUrl = process.env.WS_URL;
+    if (!wsUrl && apiUrl.startsWith("http")) {
       // Автоматически преобразуем http/https в ws/wss
       wsUrl = apiUrl.replace(/^http/, "ws");
-    } else {
+    } else if (!wsUrl) {
       wsUrl = "ws://localhost:3000";
     }
     

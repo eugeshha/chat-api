@@ -12,8 +12,8 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.API_URL": JSON.stringify(process.env.API_URL || "http://localhost:3000"),
-      "process.env.WS_URL": JSON.stringify(process.env.WS_URL || "ws://localhost:3000"),
+      "process.env.API_URL": JSON.stringify(process.env.API_URL || "https://chat-api-backend-l3sm.onrender.com"),
+      "process.env.WS_URL": JSON.stringify(process.env.WS_URL || "wss://chat-api-backend-l3sm.onrender.com"),
     }),
   ],
 });
