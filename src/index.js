@@ -8,13 +8,16 @@ class ChatApp {
     const apiUrl = typeof process !== "undefined" && process.env?.API_URL 
       ? process.env.API_URL 
       : "http://localhost:3000";
-    let wsUrl = typeof process !== "undefined" && process.env?.WS_URL 
-      ? process.env.WS_URL 
-      : "ws://localhost:3000";
     
-    // Преобразуем http/https в ws/wss, если URL начинается с http
-    if (wsUrl.startsWith("http")) {
-      wsUrl = wsUrl.replace(/^http/, "ws");
+    // Определяем WebSocket URL
+    let wsUrl;
+    if (typeof process !== "undefined" && process.env?.WS_URL) {
+      wsUrl = process.env.WS_URL;
+    } else if (apiUrl.startsWith("http")) {
+      // Автоматически преобразуем http/https в ws/wss
+      wsUrl = apiUrl.replace(/^http/, "ws");
+    } else {
+      wsUrl = "ws://localhost:3000";
     }
     
     this.apiUrl = apiUrl;

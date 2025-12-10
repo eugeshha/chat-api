@@ -34,8 +34,8 @@ jobs:
       - name: Build
         run: yarn build
         env:
-          API_URL: ${{ secrets.API_URL || 'https://chat-api-backend.onrender.com' }}
-          WS_URL: ${{ secrets.WS_URL || 'wss://chat-api-backend.onrender.com' }}
+          API_URL: ${{ secrets.API_URL || 'https://chat-api-backend-l3sm.onrender.com' }}
+          WS_URL: ${{ secrets.WS_URL || 'wss://chat-api-backend-l3sm.onrender.com' }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
