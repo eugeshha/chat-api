@@ -4,15 +4,10 @@ class ChatApp {
   constructor() {
     this.currentUser = null;
     this.ws = null;
-    // Используем переменные окружения, определенные через DefinePlugin
-    // В production они будут заменены на строки во время сборки
-    // В development используем дефолтные значения для локальной разработки
     const apiUrl = process.env.API_URL || "http://localhost:3000";
     
-    // Определяем WebSocket URL
     let wsUrl = process.env.WS_URL;
     if (!wsUrl && apiUrl.startsWith("http")) {
-      // Автоматически преобразуем http/https в ws/wss
       wsUrl = apiUrl.replace(/^http/, "ws");
     } else if (!wsUrl) {
       wsUrl = "ws://localhost:3000";
@@ -30,11 +25,9 @@ class ChatApp {
   }
 
   bindEvents() {
-    // Форма никнейма
     const nicknameForm = document.getElementById("nicknameForm");
     nicknameForm.addEventListener("submit", (e) => this.handleNicknameSubmit(e));
 
-    // Отправка сообщения
     const messageInput = document.getElementById("messageInput");
     const sendBtn = document.getElementById("sendBtn");
 
@@ -45,11 +38,9 @@ class ChatApp {
       }
     });
 
-    // Выход из чата
     const exitBtn = document.getElementById("exitBtn");
     exitBtn.addEventListener("click", () => this.exitChat());
 
-    // Обработка закрытия окна/вкладки
     window.addEventListener("beforeunload", () => {
       if (this.ws && this.currentUser) {
         this.sendExitMessage();
@@ -133,11 +124,9 @@ class ChatApp {
       try {
         const data = JSON.parse(event.data);
 
-        // Если это массив - это список пользователей
         if (Array.isArray(data)) {
           this.updateUsersList(data);
         } else if (data.type === "send") {
-          // Если это сообщение
           this.displayMessage(data);
         }
       } catch (error) {
@@ -151,7 +140,6 @@ class ChatApp {
 
     this.ws.onclose = () => {
       console.log("WebSocket disconnected");
-      // При переподключении можно добавить логику
     };
   }
 
@@ -262,7 +250,6 @@ class ChatApp {
   }
 }
 
-// Инициализация приложения при загрузке страницы
 document.addEventListener("DOMContentLoaded", () => {
   new ChatApp();
 });
