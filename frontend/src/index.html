@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat</title>
+  </head>
+  <body>
+    <!-- Модальное окно для ввода никнейма -->
+    <div id="nicknameModal" class="modal">
+      <div class="modal-content">
+        <h2>Введите ваш никнейм</h2>
+        <form id="nicknameForm">
+          <input
+            type="text"
+            id="nicknameInput"
+            placeholder="Никнейм"
+            required
+            autocomplete="off"
+          />
+          <div id="errorMessage" class="error-message"></div>
+          <button type="submit" id="submitBtn">Войти</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Основное окно чата -->
+    <div id="chatContainer" class="chat-container hidden">
+      <div class="chat-header">
+        <h1>Чат</h1>
+        <button id="exitBtn" class="exit-btn">Выйти</button>
+      </div>
+      <div class="chat-main">
+        <div class="users-panel">
+          <h3>Пользователи</h3>
+          <ul id="usersList" class="users-list"></ul>
+        </div>
+        <div class="chat-panel">
+          <div id="messagesContainer" class="messages-container"></div>
+          <div class="input-container">
+            <input
+              type="text"
+              id="messageInput"
+              placeholder="Введите сообщение..."
+              autocomplete="off"
+            />
+            <button id="sendBtn">Отправить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
+
